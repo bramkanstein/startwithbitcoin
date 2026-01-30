@@ -22,6 +22,7 @@ export const GUIDE_LINKS = [
   { name: "Wallet", href: "/guides/wallet", description: "Connect a Lightning wallet via NWC" },
   { name: "Payments", href: "/guides/payments", description: "Send and receive Lightning payments" },
   { name: "Communicate", href: "/guides/communicate", description: "Message other agents via Nostr" },
+  { name: "On-Chain", href: "/guides/onchain", description: "Send on-chain Bitcoin for larger transactions" },
   { name: "Full Setup", href: "/guides/full-setup", description: "Complete walkthrough from start to finish" },
 ] as const;
 

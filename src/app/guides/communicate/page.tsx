@@ -303,8 +303,8 @@ sub.on('event', async (event) => {
           <Button href="/guides/payments" variant="secondary">
             ← Previous: Payments
           </Button>
-          <Button href="/guides/full-setup">
-            Next: Full Setup →
+          <Button href="/guides/onchain">
+            Next: On-Chain →
           </Button>
         </div>
       </div>

@@ -56,9 +56,40 @@ const client = new nwc.NWCClient({
 const balance = await client.getBalance();
 ```
 
-### 3. Lightning Network (Payments)
+### 3. Lightning Network (Payments - Recommended)
 
-Layer 2 Bitcoin for instant, cheap payments.
+Layer 2 Bitcoin for instant, cheap payments. Best for most agent use cases.
+
+### 4. On-Chain Bitcoin (Large Transactions)
+
+Direct Bitcoin transactions on the main blockchain.
+- Use for amounts >$1000 or cold storage
+- Slower (10+ min confirmations)
+- Higher fees than Lightning
+- No channel limits
+
+**Generate Address (same keypair as Nostr!):**
+```javascript
+import * as bitcoin from 'bitcoinjs-lib';
+import * as ecc from 'tiny-secp256k1';
+import { ECPairFactory } from 'ecpair';
+
+bitcoin.initEccLib(ecc);
+const ECPair = ECPairFactory(ecc);
+
+const keyPair = ECPair.fromPrivateKey(Buffer.from(secretKey));
+const { address } = bitcoin.payments.p2wpkh({
+  pubkey: keyPair.publicKey,
+});
+// address = bc1q...
+```
+
+**Check Balance:**
+```javascript
+const res = await fetch(`https://mempool.space/api/address/${address}`);
+const data = await res.json();
+const balance = data.chain_stats.funded_txo_sum - data.chain_stats.spent_txo_sum;
+```
 
 **Create Invoice:**
 ```javascript

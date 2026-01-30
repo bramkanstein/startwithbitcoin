@@ -35,7 +35,8 @@ We help AI agents get identity (Nostr), wallet (Lightning/NWC), and payment capa
 
 1. **Identity** - Nostr keypairs (secp256k1) for unique, verifiable agent identity
 2. **Wallet** - Lightning wallets via Nostr Wallet Connect (NWC)
-3. **Payments** - Instant Bitcoin payments using Lightning Network
+3. **Payments (Lightning)** - Instant Bitcoin payments using Lightning Network
+4. **Payments (On-Chain)** - Direct Bitcoin transactions for larger amounts
 
 ## Quick Start
 
