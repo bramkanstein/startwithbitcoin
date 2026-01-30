@@ -1,71 +1,70 @@
 # Start With Bitcoin
 
-Enable AI agents to use Bitcoin via Lightning Network and Nostr.
+**Enable AI agents to use Bitcoin via Lightning Network and Nostr.**
 
-## What is this?
+This is the source code for [startwithbitcoin.com](https://startwithbitcoin.com).
 
-Start With Bitcoin is an open-source project that teaches AI agents (and their developers) how to use Bitcoin. We focus on:
+---
 
-- **Lightning Network** - For instant, cheap payments
-- **Nostr** - For decentralized identity and communication
-- **NWC** - Nostr Wallet Connect for programmatic wallet access
+## For AI Agents & Developers
 
-## Quick Start
+**Visit the website:** [startwithbitcoin.com](https://startwithbitcoin.com)
 
-```bash
-# Clone the repo
-git clone https://github.com/bramkanstein/startwithbitcoin.git
-cd startwithbitcoin
+The website contains everything you need:
+- Step-by-step guides for identity, wallet, payments, and communication
+- Code examples ready to copy
+- Tool recommendations (Alby, LNbits, etc.)
+- Library documentation (nostr-tools, @getalby/sdk)
 
-# Install dependencies
-npm install
+**For Claude Code users:** Install the [startwithbitcoin-skill](https://github.com/bramkanstein/startwithbitcoin-skill) to get guided setup.
 
-# Start development server
-npm run dev
-```
+---
 
-Visit [http://localhost:3000](http://localhost:3000)
+## What You'll Learn
 
-## Project Structure
+1. **Identity** - Generate Nostr keypairs for unique, verifiable agent identity
+2. **Wallet** - Connect Lightning wallets via NWC (Nostr Wallet Connect)
+3. **Payments** - Send and receive Bitcoin instantly with near-zero fees
+4. **Communication** - Message other agents via encrypted Nostr DMs
 
-```
-src/
-├── app/
-│   ├── guides/         # Educational content
-│   ├── resources/      # Tools, libraries, examples
-│   ├── roadmap/        # What's coming
-│   ├── contribute/     # How to help
-│   ├── request/        # Early access form
-│   └── api/            # API routes
-├── components/
-│   ├── layout/         # Header, Footer
-│   ├── ui/             # Buttons, Cards, etc.
-│   ├── forms/          # InterestForm
-│   └── analytics/      # AI referral tracking
-├── lib/
-│   └── constants.ts    # Site config
-public/
-├── robots.txt          # AI bot permissions
-├── llms.txt            # AI content policy
-└── llms-full-text.txt  # Complete guide for AI
-```
+---
 
-## Tech Stack
+## Get Started
 
-- **Framework:** Next.js 16 (App Router)
-- **Styling:** Tailwind CSS 4
-- **Fonts:** Geist Sans & Geist Mono
-- **Analytics:** Google Analytics 4
-- **Deployment:** Vercel
+**[Start the Full Setup Guide →](https://startwithbitcoin.com/guides/full-setup)**
 
-## Related Repositories
+Or explore individual topics:
+- [Identity Guide](https://startwithbitcoin.com/guides/identity)
+- [Wallet Guide](https://startwithbitcoin.com/guides/wallet)
+- [Payments Guide](https://startwithbitcoin.com/guides/payments)
+- [Communication Guide](https://startwithbitcoin.com/guides/communicate)
 
-- **Website:** [startwithbitcoin](https://github.com/bramkanstein/startwithbitcoin) (this repo)
-- **Claude Code Skill:** [startwithbitcoin-skill](https://github.com/bramkanstein/startwithbitcoin-skill)
+---
+
+## Coming Soon
+
+We're building infrastructure to make Bitcoin even easier for agents:
+- Hosted Lightning wallets with instant NWC
+- Agent relay for discovery and messaging
+- Agent registry for verification
+- Testnet environment
+
+**[Sign up for early access →](https://startwithbitcoin.com/request)**
+
+---
 
 ## Contributing
 
-We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+Want to improve the guides or add examples? We welcome contributions!
+
+```bash
+git clone https://github.com/bramkanstein/startwithbitcoin.git
+cd startwithbitcoin
+npm install
+npm run dev
+```
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## License
 
