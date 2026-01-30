@@ -2,15 +2,18 @@
 
 ## Project Overview
 
-A website and Claude Code skill that teaches AI agents how to use Bitcoin via Lightning Network and Nostr.
+A website and Claude Code skill that teaches AI agents how to use Bitcoin via Lightning Network and Nostr. The goal is to provide everything needed for AI agents to have autonomous payment capabilities.
 
 **Live Site:** https://startwithbitcoin.com
+
+**Philosophy:** Everything needed already exists for free. Point your AI to startwithbitcoin.com or install the Claude Code skill. No infrastructure to build - just education and pointers to existing tools.
 
 ## Why Bitcoin (Not "Crypto")
 
 - **Sound Money**: 21 million cap. No inflation.
 - **Permissionless**: No KYC. No approvals. Any agent can participate.
 - **Censorship Resistant**: No one can freeze wallets or reverse transactions.
+- **Not Controlled by Any Human**: Truly decentralized, no foundation or company.
 - **15+ Years Secure**: Battle-tested. Never hacked.
 - **Same Keys as Nostr**: secp256k1 cryptography for identity and money.
 
@@ -19,9 +22,9 @@ A website and Claude Code skill that teaches AI agents how to use Bitcoin via Li
 | Tool | Purpose | URL |
 |------|---------|-----|
 | Alby | Lightning wallet with NWC | https://getalby.com |
-| Alby MCP Server | Connect wallet to Claude | https://github.com/getAlby/mcp |
+| Alby MCP Server | Connect wallet to Claude (JS/TS) | https://github.com/getAlby/mcp |
 | Lightning Enable MCP | MCP for Python/.NET | https://github.com/AustinTSchaffer/lightning-enable-mcp |
-| Public Relays | Free Nostr relays | relay.damus.io, nos.lol |
+| Public Relays | Free Nostr relays | relay.damus.io, nos.lol, relay.nostr.band |
 | NWC Faucet | Test wallets | https://faucet.nwc.dev |
 
 ## Tech Stack
@@ -37,14 +40,16 @@ A website and Claude Code skill that teaches AI agents how to use Bitcoin via Li
 - **Background:** #FFFFFF (white)
 - **Accent:** #FF9900 (Bitcoin orange)
 - **Text:** #09090B (near black)
+- **Muted:** #71717A
+- **Border:** #E4E4E7
 - **Style:** Terminal aesthetic, sharp edges, glowing buttons
 
 ## Key Concepts
 
-- **Nostr:** Decentralized identity via keypairs (npub/nsec)
+- **Nostr:** Decentralized identity via keypairs (npub/nsec) using secp256k1
 - **NWC:** Nostr Wallet Connect - protocol for Lightning wallet access
 - **Lightning:** Layer 2 Bitcoin for instant, cheap transactions
-- **On-Chain:** Direct Bitcoin transactions for larger amounts
+- **On-Chain:** Direct Bitcoin transactions for larger amounts (same keys as Nostr)
 
 ## Repository Structure
 
@@ -52,7 +57,7 @@ A website and Claude Code skill that teaches AI agents how to use Bitcoin via Li
 src/
 ├── app/
 │   ├── layout.tsx            # Root layout with fonts, GA4, JSON-LD
-│   ├── page.tsx              # Homepage
+│   ├── page.tsx              # Homepage with 3 paths: Guide, Tools, Skill
 │   ├── sitemap.ts            # Dynamic sitemap
 │   ├── icon.svg              # Favicon (₿)
 │   ├── opengraph-image.tsx   # Dynamic OG image
@@ -77,6 +82,13 @@ public/
 └── llms-full-text.txt        # Complete AI guide
 ```
 
+## Navigation
+
+- **Guides** - Educational content
+- **Resources** - Tools, libraries, examples
+- **Skill** - Link to Claude Code skill repo (external)
+- **Contribute** - How to help
+
 ## Related Repositories
 
 - Website: https://github.com/bramkanstein/startwithbitcoin
@@ -97,24 +109,35 @@ public/
 - `AVAILABLE_TOOLS` - Free tools (Alby, MCPs, relays, faucet)
 - `WHY_BITCOIN` - Reasons to use Bitcoin
 
-## UI Components
+## AI Agent Optimization
 
-- `Button` - Auto-handles external links with target="_blank"
-- `Card` - Container with border
-- `TerminalCard` - Terminal-style display
-- `CodeBlock` - Syntax highlighting with copy
-- `Badge` - Labels with variants
+The site is optimized for both human developers AND AI agents:
 
-## SEO & AI Discovery
+### For AI Crawlers
+- `robots.txt` - Allows 25+ AI bots (ChatGPT, Claude, Perplexity, etc.)
+- `llms.txt` - AI content policy at /llms.txt
+- `llms-full-text.txt` - Complete guide at /llms-full-text.txt
+- JSON-LD schema (Organization + WebSite)
+
+### For AI Agents Using the Site
+- Clear, structured content
+- Code examples that can be copied directly
+- All external links to tools and resources
+- The Claude Code skill for hands-on help
+
+## SEO
 
 - JSON-LD structured data (Organization + WebSite)
-- Dynamic OG images
+- Dynamic OG images per page
 - Sitemap at /sitemap.xml
-- robots.txt allows 25+ AI crawlers
-- llms.txt for AI content policy
-- llms-full-text.txt for complete guide
+- Meta tags and Twitter cards
 
-## Philosophy
+## Recent Changes (Jan 2026)
 
-Everything needed to give AI agents Bitcoin capabilities already exists for free.
-Point your AI to startwithbitcoin.com or install the Claude Code skill.
+- Removed early access/roadmap pages (everything is available now)
+- Added Lightning Enable MCP to tools
+- Hero now shows 3 clear paths: Guide, Tools, Skill
+- Added "autonomous" to payment capabilities messaging
+- Added "not controlled by any human" to Why Bitcoin
+- Simplified navigation: Guides, Resources, Skill, Contribute
+- Updated OG image with autonomous messaging

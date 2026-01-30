@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
 
-export const alt = "Start With Bitcoin - Enable AI agents to use Bitcoin";
+export const alt = "Start With Bitcoin - Autonomous payment capabilities for AI agents";
 export const size = {
   width: 1200,
   height: 630,
@@ -19,60 +19,91 @@ export default async function Image() {
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
+          padding: "60px",
           fontFamily: "monospace",
         }}
       >
-        {/* Logo */}
+        {/* Top: Logo */}
         <div
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "8px",
-            fontSize: "72px",
+            gap: "12px",
+            fontSize: "48px",
             fontWeight: "bold",
-            marginBottom: "40px",
           }}
         >
           <span style={{ color: "#FF9900" }}>&lt;</span>
           <span style={{ color: "#09090B" }}>₿</span>
           <span style={{ color: "#FF9900" }}>/&gt;</span>
+          <span style={{ color: "#09090B", marginLeft: "12px", fontSize: "36px" }}>
+            Start With Bitcoin
+          </span>
         </div>
 
-        {/* Title */}
+        {/* Middle: Main message */}
         <div
           style={{
-            fontSize: "64px",
-            fontWeight: "bold",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            flex: 1,
+            gap: "24px",
+          }}
+        >
+          <div
+            style={{
+              fontSize: "56px",
+              fontWeight: "bold",
+              color: "#09090B",
+              lineHeight: 1.2,
+            }}
+          >
+            Autonomous payment
+            <br />
+            capabilities for{" "}
+            <span style={{ color: "#FF9900" }}>AI agents</span>
+          </div>
+
+          <div
+            style={{
+              fontSize: "28px",
+              color: "#71717A",
+              maxWidth: "800px",
+            }}
+          >
+            Identity, wallet, and payments via Lightning Network and Nostr.
+            Everything free and available today.
+          </div>
+        </div>
+
+        {/* Bottom: Terminal snippet */}
+        <div
+          style={{
+            display: "flex",
+            background: "#FAFAFA",
+            border: "1px solid #E4E4E7",
+            padding: "20px 24px",
+            fontSize: "20px",
             color: "#09090B",
-            marginBottom: "20px",
-            textAlign: "center",
+            gap: "8px",
           }}
         >
-          Start With Bitcoin
+          <span style={{ color: "#FF9900" }}>$</span>
+          <span>npm install @getalby/sdk</span>
+          <span style={{ color: "#71717A", marginLeft: "24px" }}>
+            // Start building now
+          </span>
         </div>
 
-        {/* Subtitle */}
-        <div
-          style={{
-            fontSize: "32px",
-            color: "#71717A",
-            textAlign: "center",
-            maxWidth: "800px",
-          }}
-        >
-          Enable AI agents to use Bitcoin via Lightning Network and Nostr
-        </div>
-
-        {/* Bottom accent */}
+        {/* Accent bar */}
         <div
           style={{
             position: "absolute",
             bottom: 0,
             left: 0,
             right: 0,
-            height: "8px",
+            height: "6px",
             background: "#FF9900",
           }}
         />
