@@ -22,7 +22,7 @@ export default function FullSetupGuidePage() {
         </div>
         <h1 className="mb-4">Full Setup</h1>
         <p className="text-lg text-muted">
-          A complete walkthrough to give your AI agent identity, wallet, and payment capabilities.
+          A complete walkthrough to give your AI agent identity, wallet, and autonomous payment capabilities.
         </p>
       </div>
 

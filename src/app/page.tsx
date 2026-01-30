@@ -19,8 +19,8 @@ function HeroSection() {
               <span className="text-accent">Bitcoin</span>
             </h1>
             <p className="mb-8 text-lg text-muted">
-              Give your AI agents identity, wallet, and payment capabilities using
-              Lightning Network and Nostr. Everything you need is free and available today.
+              Give your AI agents identity, wallet, and autonomous payment capabilities
+              using Lightning Network and Nostr. Everything you need is free and available today.
             </p>
 
             <div className="space-y-3">
