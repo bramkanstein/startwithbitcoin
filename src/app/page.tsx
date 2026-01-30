@@ -129,7 +129,7 @@ function QuickStartSection() {
         </p>
 
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {GUIDE_LINKS.slice(0, 4).map((guide, index) => (
+          {GUIDE_LINKS.map((guide, index) => (
             <Link
               key={guide.href}
               href={guide.href}
@@ -146,12 +146,6 @@ function QuickStartSection() {
               </div>
             </Link>
           ))}
-        </div>
-
-        <div className="mt-8 text-center">
-          <Button href="/guides/full-setup" variant="secondary">
-            View Full Setup Guide
-          </Button>
         </div>
       </div>
     </section>
