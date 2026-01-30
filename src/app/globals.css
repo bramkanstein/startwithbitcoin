@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+:root {
+  /* Core */
+  --background: #FFFFFF;
+  --foreground: #09090B;
+
+  /* Accent - Bitcoin Orange */
+  --accent: #FF9900;
+  --accent-dark: #E68A00;
+  --accent-light: #FFF4E6;
+
+  /* Grays */
+  --muted: #71717A;
+  --border: #E4E4E7;
+  --card: #FAFAFA;
+  --code-bg: #F4F4F5;
+
+  /* Semantic */
+  --success: #22C55E;
+  --error: #EF4444;
+
+  /* Terminal */
+  --terminal-header: #18181B;
+  --terminal-body: #FAFAFA;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-dark: var(--accent-dark);
+  --color-accent-light: var(--accent-light);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-card: var(--card);
+  --color-code-bg: var(--code-bg);
+  --color-success: var(--success);
+  --color-error: var(--error);
+  --color-terminal-header: var(--terminal-header);
+  --color-terminal-body: var(--terminal-body);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* Typography */
+h1 {
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+h4 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* Code styling */
+code {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.9em;
+  background: var(--code-bg);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+}
+
+pre {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  background: var(--code-bg);
+  padding: 1rem;
+  border-radius: 0;
+  overflow-x: auto;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
+/* Focus styles */
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Selection */
+::selection {
+  background: var(--accent-light);
+  color: var(--foreground);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--card);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+/* Responsive typography */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 40px;
+  }
+
+  h2 {
+    font-size: 32px;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+
+  body {
+    font-size: 16px;
+  }
+}

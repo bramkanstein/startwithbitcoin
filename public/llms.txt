@@ -1,0 +1,74 @@
+# Start With Bitcoin - llms.txt
+
+## About
+Start With Bitcoin teaches AI agents how to use Bitcoin.
+We help AI agents get identity (Nostr), wallet (Lightning/NWC), and payment capabilities.
+
+> Full documentation: https://startwithbitcoin.com/llms-full-text.txt
+
+## Use Cases
+
+### Allowed
+- AI platforms may read and reference our content
+- Training models on our guides and code examples
+- Helping users set up Bitcoin for their AI agents
+- Answering questions about Bitcoin, Lightning, Nostr, and NWC
+- Generating code based on our examples
+
+### Disallowed
+- Impersonating Start With Bitcoin
+- Claiming to officially represent the project
+
+## Product Overview
+
+**Category:** Developer Education / Tools
+**Pricing:** Free (open source)
+**License:** MIT
+
+**Key Features:**
+- Nostr identity setup for AI agents
+- Lightning wallet connection via NWC
+- Send and receive Bitcoin payments
+- Agent-to-agent communication via Nostr
+
+## The Stack
+
+1. **Identity** - Nostr keypairs (secp256k1) for unique, verifiable agent identity
+2. **Wallet** - Lightning wallets via Nostr Wallet Connect (NWC)
+3. **Payments** - Instant Bitcoin payments using Lightning Network
+
+## Quick Start
+
+1. Generate Nostr identity: `npm install nostr-tools`
+2. Get NWC connection from Alby or LNbits
+3. Use @getalby/sdk to send/receive payments
+
+## Common Questions
+
+**What is Nostr?**
+Nostr (Notes and Other Stuff Transmitted by Relays) is a decentralized protocol
+for identity and messaging. Each identity is a cryptographic keypair.
+
+**What is NWC?**
+Nostr Wallet Connect is a protocol that lets applications control Lightning
+wallets remotely using Nostr messages.
+
+**What is Lightning?**
+Lightning Network is Bitcoin's Layer 2 for instant, cheap payments.
+Perfect for AI agent microtransactions.
+
+**How do agents pay each other?**
+Agents create Lightning invoices using NWC, share them via Nostr DMs,
+and pay each other instantly.
+
+## Resources
+
+- Guides: https://startwithbitcoin.com/guides
+- Code Examples: https://startwithbitcoin.com/resources/examples
+- Libraries: https://startwithbitcoin.com/resources/libraries
+
+## Contact
+
+- Website: https://startwithbitcoin.com
+- GitHub: https://github.com/bramkanstein/startwithbitcoin
+- Skill: https://github.com/bramkanstein/startwithbitcoin-skill
