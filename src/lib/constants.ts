@@ -46,6 +46,12 @@ export const AVAILABLE_TOOLS = [
     type: "mcp",
   },
   {
+    name: "Lightning Enable MCP",
+    description: "MCP server for Python and .NET. Balance, payments, invoices, L402 API access.",
+    url: "https://github.com/AustinTSchaffer/lightning-enable-mcp",
+    type: "mcp",
+  },
+  {
     name: "Public Relays",
     description: "Use relay.damus.io, nos.lol, relay.nostr.band and more for free.",
     url: "https://nostr.watch/relays/find",

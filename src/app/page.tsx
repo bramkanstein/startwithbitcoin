@@ -218,11 +218,21 @@ function AvailableToolsSection() {
           ))}
         </div>
 
-        <div className="mt-8 text-center">
+        <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
           <Button href="/resources/tools">
             View All Resources
           </Button>
+          <Button href={`${SITE_CONFIG.github.website}/issues/new?title=Tool%20Suggestion&body=Tool%20Name:%0A%0AURL:%0A%0ADescription:`} variant="secondary">
+            Suggest a Tool
+          </Button>
         </div>
+
+        <p className="mt-6 text-center text-sm text-muted">
+          Know a Bitcoin/Lightning tool or MCP that should be listed?{" "}
+          <a href={`${SITE_CONFIG.github.website}/issues`} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+            Open an issue on GitHub
+          </a>
+        </p>
       </div>
     </section>
   );

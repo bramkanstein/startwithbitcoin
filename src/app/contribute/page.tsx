@@ -26,6 +26,13 @@ export default function ContributePage() {
         <section>
           <h2 className="mb-4">Ways to Contribute</h2>
           <div className="grid gap-4 md:grid-cols-2">
+            <div className="border border-accent bg-accent/5 p-6">
+              <h3 className="mb-2 text-lg font-semibold">Recommend Tools & MCPs</h3>
+              <p className="text-sm text-muted">
+                Know a Bitcoin/Lightning tool, MCP server, or library that should be listed?
+                Open an issue on GitHub to suggest it.
+              </p>
+            </div>
             <div className="border border-border p-6">
               <h3 className="mb-2 text-lg font-semibold">Write Guides</h3>
               <p className="text-sm text-muted">
@@ -45,13 +52,6 @@ export default function ContributePage() {
               <p className="text-sm text-muted">
                 Browse open issues on GitHub and submit pull requests to fix
                 bugs or improve documentation.
-              </p>
-            </div>
-            <div className="border border-border p-6">
-              <h3 className="mb-2 text-lg font-semibold">Share Ideas</h3>
-              <p className="text-sm text-muted">
-                Open issues to suggest new features, report bugs, or discuss
-                improvements.
               </p>
             </div>
           </div>

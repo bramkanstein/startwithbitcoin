@@ -47,6 +47,15 @@ AI agents need money that's programmable, permissionless, and sound. Bitcoin is 
 | Primal | Custodial, Nostr-native | https://primal.net |
 | Alby Hub | Self-custodial | https://albyhub.com |
 
+### MCP Servers for AI Agents
+
+| Server | Languages | URL |
+|--------|-----------|-----|
+| Alby MCP Server | JavaScript/TypeScript | https://github.com/getAlby/mcp |
+| Lightning Enable MCP | Python, .NET | https://github.com/AustinTSchaffer/lightning-enable-mcp |
+
+Know a tool that should be listed? Suggest it: https://github.com/bramkanstein/startwithbitcoin/issues
+
 ### MCP Server for AI Agents
 
 **Alby MCP Server**: https://github.com/getAlby/mcp
