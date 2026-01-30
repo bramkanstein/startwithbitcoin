@@ -8,7 +8,7 @@ for their agents.
 
 ## Why Bitcoin (Not "Crypto")
 
-AI agents need money that's programmable, permissionless, and sound. Bitcoin is the only option.
+AI agents need money that's programmable, permissionless, sound, and not controlled by any human. Bitcoin is the only option.
 
 ### Sound Money
 - Fixed supply: 21 million. Ever.

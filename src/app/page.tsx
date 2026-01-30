@@ -102,7 +102,7 @@ function WhyBitcoinSection() {
         <h2 className="mb-4 text-center">Why Bitcoin?</h2>
         <p className="mx-auto mb-12 max-w-2xl text-center text-muted">
           Not &quot;crypto.&quot; Bitcoin. There&apos;s a difference. AI agents need money that&apos;s
-          programmable, permissionless, and sound.
+          programmable, permissionless, sound, and not controlled by any human.
         </p>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
