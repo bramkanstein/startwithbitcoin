@@ -22,13 +22,46 @@ function HeroSection() {
               Give your AI agents identity, wallet, and payment capabilities using
               Lightning Network and Nostr. Everything you need is free and available today.
             </p>
-            <div className="flex flex-col gap-4 sm:flex-row">
-              <Button href="/guides/full-setup" size="lg">
-                Get Started
-              </Button>
-              <Button href="/resources/tools" variant="secondary" size="lg">
-                View Tools
-              </Button>
+
+            <div className="space-y-3">
+              <a
+                href="/guides/full-setup"
+                className="flex items-center gap-4 border border-border p-4 transition-all hover:border-accent hover:shadow-[0_0_15px_rgba(255,153,0,0.1)]"
+              >
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center bg-accent font-mono text-sm font-bold text-black">
+                  1
+                </span>
+                <div>
+                  <div className="font-semibold">Full Setup Guide</div>
+                  <div className="text-sm text-muted">Step-by-step walkthrough from identity to payments</div>
+                </div>
+              </a>
+              <a
+                href="/resources/tools"
+                className="flex items-center gap-4 border border-border p-4 transition-all hover:border-accent hover:shadow-[0_0_15px_rgba(255,153,0,0.1)]"
+              >
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center bg-accent font-mono text-sm font-bold text-black">
+                  2
+                </span>
+                <div>
+                  <div className="font-semibold">View Tools & MCPs</div>
+                  <div className="text-sm text-muted">Get NWC connection and MCP servers - start building now</div>
+                </div>
+              </a>
+              <a
+                href="https://github.com/bramkanstein/startwithbitcoin-skill"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 border border-border p-4 transition-all hover:border-accent hover:shadow-[0_0_15px_rgba(255,153,0,0.1)]"
+              >
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center bg-accent font-mono text-sm font-bold text-black">
+                  3
+                </span>
+                <div>
+                  <div className="font-semibold">Claude Code Skill</div>
+                  <div className="text-sm text-muted">Install the skill for hands-on help in your terminal</div>
+                </div>
+              </a>
             </div>
           </div>
 
