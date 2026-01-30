@@ -82,7 +82,16 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 md:flex-row">
           <p className="text-sm text-muted">
-            Built for AI agents. Open source under MIT License.
+            Built for AI agents by{" "}
+            <a
+              href="https://x.com/bramk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground hover:text-accent"
+            >
+              @bramk
+            </a>
+            . Open source under MIT License.
           </p>
           <p className="font-mono text-sm text-muted">
             <span className="text-accent">#</span> 21M
