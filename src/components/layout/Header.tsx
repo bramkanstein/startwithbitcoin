@@ -97,10 +97,10 @@ export function Header() {
             GitHub
           </a>
           <Link
-            href="/request"
+            href="/guides/full-setup"
             className="bg-accent px-4 py-2 text-sm font-medium text-black shadow-[0_0_15px_rgba(255,153,0,0.2)] transition-all hover:bg-accent-dark hover:shadow-[0_0_20px_rgba(255,153,0,0.3)]"
           >
-            Get Early Access
+            Get Started
           </Link>
         </div>
 
@@ -148,11 +148,11 @@ export function Header() {
               GitHub
             </a>
             <Link
-              href="/request"
+              href="/guides/full-setup"
               className="mt-2 bg-accent px-4 py-3 text-center text-base font-medium text-black"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Get Early Access
+              Get Started
             </Link>
           </nav>
         </div>

@@ -26,8 +26,8 @@ function HeroSection() {
               <Button href="/guides/full-setup" size="lg">
                 Get Started
               </Button>
-              <Button href="https://github.com/getAlby/mcp" variant="secondary" size="lg">
-                Alby MCP Server
+              <Button href="/resources/tools" variant="secondary" size="lg">
+                View Tools
               </Button>
             </div>
           </div>
@@ -79,16 +79,6 @@ function WhyBitcoinSection() {
               <p className="text-sm text-muted">{item.description}</p>
             </div>
           ))}
-        </div>
-
-        <div className="mt-12 mx-auto max-w-3xl border border-accent bg-accent/5 p-6">
-          <h3 className="mb-4 font-semibold">Why not other &quot;crypto&quot;?</h3>
-          <ul className="space-y-2 text-sm text-muted">
-            <li><strong className="text-foreground">No pre-mines or VCs</strong> — Bitcoin had no ICO, no insider allocation. Fair launch in 2009.</li>
-            <li><strong className="text-foreground">15+ years of security</strong> — Battle-tested. Never hacked. $1T+ secured.</li>
-            <li><strong className="text-foreground">True decentralization</strong> — No foundation controlling upgrades. No single point of failure.</li>
-            <li><strong className="text-foreground">Nostr uses Bitcoin&apos;s cryptography</strong> — Same secp256k1 keys. One identity for money and communication.</li>
-          </ul>
         </div>
       </div>
     </section>
@@ -266,11 +256,11 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <WhyBitcoinSection />
       <WhatIsThisSection />
       <TheStackSection />
       <QuickStartSection />
       <AvailableToolsSection />
+      <WhyBitcoinSection />
       <CommunitySection />
     </>
   );

@@ -11,9 +11,8 @@ export const SITE_CONFIG = {
 
 export const NAV_LINKS = [
   { name: "Guides", href: "/guides" },
-  { name: "Skill", href: "https://github.com/bramkanstein/startwithbitcoin-skill", external: true },
   { name: "Resources", href: "/resources" },
-  { name: "Roadmap", href: "/roadmap" },
+  { name: "Skill", href: "https://github.com/bramkanstein/startwithbitcoin-skill", external: true },
   { name: "Contribute", href: "/contribute" },
 ] as const;
 
