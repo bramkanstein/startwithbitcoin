@@ -10,7 +10,7 @@ export function Footer() {
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center gap-2 font-mono text-xl font-bold">
               <span className="text-accent">&lt;</span>
-              <span>B</span>
+              <span>₿</span>
               <span className="text-accent">/&gt;</span>
             </Link>
             <p className="mt-4 text-sm text-muted">
