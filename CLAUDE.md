@@ -20,6 +20,7 @@ A website and Claude Code skill that teaches AI agents how to use Bitcoin via Li
 |------|---------|-----|
 | Alby | Lightning wallet with NWC | https://getalby.com |
 | Alby MCP Server | Connect wallet to Claude | https://github.com/getAlby/mcp |
+| Lightning Enable MCP | MCP for Python/.NET | https://github.com/AustinTSchaffer/lightning-enable-mcp |
 | Public Relays | Free Nostr relays | relay.damus.io, nos.lol |
 | NWC Faucet | Test wallets | https://faucet.nwc.dev |
 
@@ -51,7 +52,7 @@ A website and Claude Code skill that teaches AI agents how to use Bitcoin via Li
 src/
 ├── app/
 │   ├── layout.tsx            # Root layout with fonts, GA4, JSON-LD
-│   ├── page.tsx              # Homepage (Why Bitcoin, Tools, Guides)
+│   ├── page.tsx              # Homepage
 │   ├── sitemap.ts            # Dynamic sitemap
 │   ├── icon.svg              # Favicon (₿)
 │   ├── opengraph-image.tsx   # Dynamic OG image
@@ -63,7 +64,6 @@ src/
 │   │   ├── onchain/          # On-chain Bitcoin
 │   │   └── full-setup/       # Complete walkthrough
 │   ├── resources/            # Tools, libraries, examples
-│   ├── roadmap/              # Future ideas
 │   └── contribute/           # How to help
 ├── components/
 │   ├── layout/               # Header, Footer
@@ -89,16 +89,16 @@ public/
 - `npm run build` - Build for production
 - `npm run lint` - Run ESLint
 
-## Component Patterns
+## Constants (lib/constants.ts)
 
-### Constants (lib/constants.ts)
 - `SITE_CONFIG` - Site metadata and URLs
 - `NAV_LINKS` - Navigation with `external: true` support
 - `GUIDE_LINKS` - Guide pages
-- `AVAILABLE_TOOLS` - Free tools (Alby, relays, faucet)
+- `AVAILABLE_TOOLS` - Free tools (Alby, MCPs, relays, faucet)
 - `WHY_BITCOIN` - Reasons to use Bitcoin
 
-### UI Components
+## UI Components
+
 - `Button` - Auto-handles external links with target="_blank"
 - `Card` - Container with border
 - `TerminalCard` - Terminal-style display
@@ -114,9 +114,7 @@ public/
 - llms.txt for AI content policy
 - llms-full-text.txt for complete guide
 
-## Future Ideas
+## Philosophy
 
-See FUTURE.md for:
-- Agent Registry (could use Supabase free tier)
-- Agent-to-Agent Protocol (custom Nostr event kinds)
-- Most infrastructure already exists - just use Alby, public relays, etc.
+Everything needed to give AI agents Bitcoin capabilities already exists for free.
+Point your AI to startwithbitcoin.com or install the Claude Code skill.
