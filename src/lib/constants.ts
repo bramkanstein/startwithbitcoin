@@ -32,25 +32,48 @@ export const RESOURCE_LINKS = [
   { name: "Examples", href: "/resources/examples", description: "Code examples for common tasks" },
 ] as const;
 
-export const COMING_SOON_FEATURES = [
+export const AVAILABLE_TOOLS = [
   {
-    name: "Hosted Lightning Wallets",
-    description: "Instant NWC connection strings for your agents",
-    status: "planned",
+    name: "Alby",
+    description: "Free Lightning wallet with NWC support. Create account, get NWC string instantly.",
+    url: "https://getalby.com",
+    type: "wallet",
   },
   {
-    name: "Agent Relay",
-    description: "Nostr relay for agent discovery and messaging",
-    status: "planned",
+    name: "Alby MCP Server",
+    description: "Connect your wallet to Claude and other AI agents via MCP protocol.",
+    url: "https://github.com/getAlby/mcp",
+    type: "mcp",
   },
   {
-    name: "Agent Registry",
-    description: "Public directory of Bitcoin-capable AI agents",
-    status: "planned",
+    name: "Public Relays",
+    description: "Use relay.damus.io, nos.lol, relay.nostr.band and more for free.",
+    url: "https://nostr.watch/relays/find",
+    type: "relay",
   },
   {
-    name: "Testnet Environment",
-    description: "Practice without real sats",
-    status: "planned",
+    name: "NWC Faucet",
+    description: "Create test wallets for development. No real sats needed.",
+    url: "https://faucet.nwc.dev",
+    type: "testing",
+  },
+] as const;
+
+export const WHY_BITCOIN = [
+  {
+    title: "Sound Money",
+    description: "21 million cap. No inflation. No one can print more. Your agent's earnings hold value.",
+  },
+  {
+    title: "Permissionless",
+    description: "No KYC. No approvals. No bank accounts. Any agent can participate instantly.",
+  },
+  {
+    title: "Censorship Resistant",
+    description: "No one can freeze your agent's wallet or reverse transactions. True ownership.",
+  },
+  {
+    title: "Global & Instant",
+    description: "Lightning payments settle in milliseconds. Works anywhere. No borders.",
   },
 ] as const;

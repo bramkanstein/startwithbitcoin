@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/Button";
 import { Card, CardTitle, CardDescription } from "@/components/ui/Card";
 import { TerminalCard, TerminalLine, TerminalOutput } from "@/components/ui/TerminalCard";
 import { Badge } from "@/components/ui/Badge";
-import { SITE_CONFIG, GUIDE_LINKS, COMING_SOON_FEATURES } from "@/lib/constants";
+import { SITE_CONFIG, GUIDE_LINKS, AVAILABLE_TOOLS, WHY_BITCOIN } from "@/lib/constants";
 
 function HeroSection() {
   return (
@@ -20,36 +20,75 @@ function HeroSection() {
             </h1>
             <p className="mb-8 text-lg text-muted">
               Give your AI agents identity, wallet, and payment capabilities using
-              Lightning Network and Nostr. Open source guides and tools.
+              Lightning Network and Nostr. Everything you need is free and available today.
             </p>
             <div className="flex flex-col gap-4 sm:flex-row">
               <Button href="/guides/full-setup" size="lg">
                 Get Started
               </Button>
-              <Button href={SITE_CONFIG.github.website} variant="secondary" size="lg">
-                View on GitHub
+              <Button href="https://github.com/getAlby/mcp" variant="secondary" size="lg">
+                Alby MCP Server
               </Button>
             </div>
           </div>
 
           <div className="flex items-center">
-            <TerminalCard label="Agent Init" className="w-full">
-              <TerminalLine>npx startwithbitcoin init</TerminalLine>
+            <TerminalCard label="Lightning Payment" className="w-full">
+              <TerminalLine>npm install @getalby/sdk</TerminalLine>
               <TerminalOutput>
-                <div className="mt-2 space-y-1">
-                  <div className="text-success">✓ Generated Nostr identity</div>
-                  <div className="text-success">✓ Connected Lightning wallet via NWC</div>
-                  <div className="text-success">✓ Agent ready to send/receive sats</div>
-                </div>
+                <div className="mt-2 text-muted">+ @getalby/sdk@3.7.1</div>
               </TerminalOutput>
               <div className="mt-4 border-t border-border pt-4">
-                <TerminalLine prompt="agent$">pay invoice lnbc...</TerminalLine>
+                <TerminalLine prompt="#">Connect wallet &amp; pay</TerminalLine>
                 <TerminalOutput>
-                  <div className="mt-1 text-success">Payment sent: 1,000 sats</div>
+                  <pre className="mt-2 text-sm">
+{`const nwc = new NWCClient({
+  nostrWalletConnectUrl: NWC_URL
+});
+await nwc.payInvoice({ invoice });`}
+                  </pre>
+                </TerminalOutput>
+              </div>
+              <div className="mt-4 border-t border-border pt-4">
+                <TerminalOutput>
+                  <div className="text-success">✓ Payment sent: 1,000 sats</div>
                 </TerminalOutput>
               </div>
             </TerminalCard>
           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function WhyBitcoinSection() {
+  return (
+    <section className="border-b border-border bg-card py-20">
+      <div className="mx-auto max-w-6xl px-4">
+        <h2 className="mb-4 text-center">Why Bitcoin?</h2>
+        <p className="mx-auto mb-12 max-w-2xl text-center text-muted">
+          Not &quot;crypto.&quot; Bitcoin. There&apos;s a difference. AI agents need money that&apos;s
+          programmable, permissionless, and sound.
+        </p>
+
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {WHY_BITCOIN.map((item) => (
+            <div key={item.title} className="border border-border bg-background p-6">
+              <h3 className="mb-2 font-semibold">{item.title}</h3>
+              <p className="text-sm text-muted">{item.description}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-12 mx-auto max-w-3xl border border-accent bg-accent/5 p-6">
+          <h3 className="mb-4 font-semibold">Why not other &quot;crypto&quot;?</h3>
+          <ul className="space-y-2 text-sm text-muted">
+            <li><strong className="text-foreground">No pre-mines or VCs</strong> — Bitcoin had no ICO, no insider allocation. Fair launch in 2009.</li>
+            <li><strong className="text-foreground">15+ years of security</strong> — Battle-tested. Never hacked. $1T+ secured.</li>
+            <li><strong className="text-foreground">True decentralization</strong> — No foundation controlling upgrades. No single point of failure.</li>
+            <li><strong className="text-foreground">Nostr uses Bitcoin&apos;s cryptography</strong> — Same secp256k1 keys. One identity for money and communication.</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -152,33 +191,37 @@ function QuickStartSection() {
   );
 }
 
-function ComingSoonSection() {
+function AvailableToolsSection() {
   return (
     <section className="border-b border-border bg-card py-20">
       <div className="mx-auto max-w-6xl px-4">
-        <h2 className="mb-4 text-center">Coming Soon</h2>
+        <h2 className="mb-4 text-center">Tools Available Today</h2>
         <p className="mx-auto mb-12 max-w-2xl text-center text-muted">
-          We&apos;re building infrastructure to make Bitcoin even easier for agents.
-          Sign up to get early access.
+          Everything you need exists and is free. No waiting. Start building now.
         </p>
 
         <div className="grid gap-4 md:grid-cols-2">
-          {COMING_SOON_FEATURES.map((feature) => (
-            <div
-              key={feature.name}
-              className="flex items-start gap-4 border border-border bg-background p-6"
+          {AVAILABLE_TOOLS.map((tool) => (
+            <a
+              key={tool.name}
+              href={tool.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-start gap-4 border border-border bg-background p-6 transition-all hover:border-accent hover:shadow-[0_0_15px_rgba(255,153,0,0.1)]"
             >
-              <Badge variant="warning">Soon</Badge>
+              <Badge variant="accent">{tool.type}</Badge>
               <div>
-                <h4 className="mb-1 font-semibold">{feature.name}</h4>
-                <p className="text-sm text-muted">{feature.description}</p>
+                <h4 className="mb-1 font-semibold">{tool.name}</h4>
+                <p className="text-sm text-muted">{tool.description}</p>
               </div>
-            </div>
+            </a>
           ))}
         </div>
 
         <div className="mt-8 text-center">
-          <Button href="/request">Get Early Access</Button>
+          <Button href="/resources/tools">
+            View All Resources
+          </Button>
         </div>
       </div>
     </section>
@@ -213,10 +256,11 @@ export default function Home() {
   return (
     <>
       <HeroSection />
+      <WhyBitcoinSection />
       <WhatIsThisSection />
       <TheStackSection />
       <QuickStartSection />
-      <ComingSoonSection />
+      <AvailableToolsSection />
       <CommunitySection />
     </>
   );

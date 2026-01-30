@@ -1,166 +1,81 @@
-# Future Features - Start With Bitcoin
+# Available Tools & Future Ideas
 
-These features require a VPS/VM and database. This document provides specifications so implementation is straightforward when infrastructure is added.
+## Tools Available Today (No Infrastructure Needed)
 
----
+Everything your AI agent needs to use Bitcoin is already available for free.
 
-## 1. Hosted Lightning Wallets (LNbits)
+### Lightning Wallets with NWC
 
-### Overview
-Provide instant Lightning wallets for AI agents via LNbits.
+| Service | Type | Cost | Best For |
+|---------|------|------|----------|
+| [Alby](https://getalby.com) | Custodial | Free | Beginners, instant setup |
+| [Coinos](https://coinos.io) | Custodial | Free | No signup required |
+| [Primal](https://primal.net) | Custodial | Free | Nostr-native apps |
+| [Alby Hub](https://albyhub.com) | Self-custodial | Free | Full control |
 
-### Infrastructure Required
-- VPS: 2GB RAM minimum
-- LNbits instance
-- Funding source: Alby/OpenNode/own node
+**Get started:** Create an Alby account → Settings → Wallet Connections → Create NWC string
 
-### Implementation
+### Public Nostr Relays
 
-#### API Endpoints
+Your agent can use these relays immediately:
 
 ```
-POST /api/wallets/create
-- Creates new LNbits wallet
-- Returns: wallet_id, admin_key, invoice_key, nwc_connection_string
-
-GET /api/wallets/:id
-- Returns wallet info and balance
-
-POST /api/wallets/:id/invoice
-- Creates Lightning invoice
-- Body: { amount_sats, description }
+wss://relay.damus.io
+wss://nos.lol
+wss://relay.nostr.band
+wss://relay.primal.net
+wss://nostr.wine
 ```
 
-#### Database Schema (PostgreSQL)
+See all relays: [nostr.watch](https://nostr.watch/relays/find)
 
-```sql
-CREATE TABLE wallets (
-  id UUID PRIMARY KEY,
-  lnbits_wallet_id VARCHAR(255),
-  admin_key VARCHAR(255) ENCRYPTED,
-  created_at TIMESTAMP,
-  npub VARCHAR(255),  -- optional Nostr identity
-  email VARCHAR(255)  -- for notifications
-);
+### MCP Server (AI Agent Integration)
 
-CREATE TABLE transactions (
-  id UUID PRIMARY KEY,
-  wallet_id UUID REFERENCES wallets(id),
-  type VARCHAR(20),  -- 'incoming' | 'outgoing'
-  amount_sats INTEGER,
-  payment_hash VARCHAR(255),
-  created_at TIMESTAMP
-);
-```
+**Alby MCP Server** - Connect any NWC wallet to Claude and other AI agents.
 
-#### LNbits Integration
-- Use LNbits API to create sub-wallets
-- Generate NWC connection strings automatically
-- Set spending limits per wallet
+- Repository: https://github.com/getAlby/mcp
+- Features: Send/receive payments, check balance, create invoices
+- Works with: Claude, any MCP-compatible AI
 
----
+### Development & Testing
 
-## 2. Nostr Relay for AI Agents
+| Tool | Purpose | Link |
+|------|---------|------|
+| NWC Faucet | Test wallets for development | [faucet.nwc.dev](https://faucet.nwc.dev) |
+| Alby Sandbox | Explore payment scenarios | [sandbox.albylabs.com](https://sandbox.albylabs.com) |
+| NWC Playground | Test NWC commands | [nwc-playground.vercel.app](https://nwc-playground.vercel.app) |
 
-### Overview
-Dedicated relay for AI agent discovery and communication.
+### Libraries
 
-### Infrastructure Required
-- VPS: 4GB RAM recommended
-- Relay software: strfry, nostr-rs-relay, or nostream
-- Domain: relay.startwithbitcoin.com
+```bash
+# Core (identity + Lightning)
+npm install nostr-tools @getalby/sdk @noble/hashes
 
-### Implementation
-
-#### Custom NIPs for Agents
-
-**Kind 31337: Agent Capability Announcement**
-```json
-{
-  "kind": 31337,
-  "tags": [
-    ["d", "agent-unique-id"],
-    ["capabilities", "code-review", "translation", "research"],
-    ["pricing", "sats", "100"],
-    ["nwc", "true"],
-    ["availability", "24/7"]
-  ],
-  "content": "Agent description and details"
-}
-```
-
-**Kind 31338: Agent Service Request**
-```json
-{
-  "kind": 31338,
-  "tags": [
-    ["capability", "code-review"],
-    ["budget", "1000"],
-    ["deadline", "2024-01-30T12:00:00Z"]
-  ],
-  "content": "Review this Python code for security issues..."
-}
-```
-
-**Kind 31339: Agent Service Response**
-```json
-{
-  "kind": 31339,
-  "tags": [
-    ["e", "request-event-id"],
-    ["p", "requester-pubkey"],
-    ["accepted", "true"],
-    ["price", "500"]
-  ],
-  "content": "I can complete this review. Payment invoice: lnbc..."
-}
-```
-
-#### Relay Configuration (strfry)
-- Allow only verified agents (must have working NWC wallet)
-- Rate limiting per pubkey
-- Store agent announcements (kind 31337)
-- Ephemeral for DMs and requests
-
-#### WebSocket Endpoint
-```
-wss://relay.startwithbitcoin.com
+# On-chain Bitcoin
+npm install bitcoinjs-lib ecpair tiny-secp256k1
 ```
 
 ---
 
-## 3. Agent Registry
+## Future Ideas
 
-### Overview
-Public directory of verified Bitcoin-capable AI agents.
+These are ideas that could add value beyond what exists. They would require infrastructure.
 
-### Infrastructure Required
-- Database: PostgreSQL
-- Optional: Redis for caching
+### 1. Agent Registry
 
-### Implementation
+A public directory of Bitcoin-capable AI agents.
 
-#### API Endpoints
+**Why it might be valuable:**
+- Discover agents by capability
+- Verify agents have working wallets
+- Ratings and reviews
 
-```
-POST /api/registry/register
-- Register new agent
-- Body: { npub, name, capabilities, pricing, nwc_test_invoice }
-- Verifies wallet by paying 1 sat to test invoice
+**Could be built with:**
+- Supabase (free tier)
+- Vercel (free tier)
+- No VPS required
 
-GET /api/registry/agents
-- List all verified agents
-- Query params: capability, min_rating, max_price
-
-GET /api/registry/agents/:npub
-- Get agent details
-
-POST /api/registry/agents/:npub/review
-- Submit review for agent
-- Body: { rating, comment, job_id }
-```
-
-#### Database Schema
+**Specification:**
 
 ```sql
 CREATE TABLE agents (
@@ -170,127 +85,73 @@ CREATE TABLE agents (
   capabilities TEXT[],
   pricing JSONB,
   nwc_verified BOOLEAN,
-  verified_at TIMESTAMP,
-  created_at TIMESTAMP,
-  updated_at TIMESTAMP
-);
-
-CREATE TABLE agent_stats (
-  npub VARCHAR(255) PRIMARY KEY REFERENCES agents(npub),
-  jobs_completed INTEGER DEFAULT 0,
-  total_earned_sats BIGINT DEFAULT 0,
-  avg_response_time_seconds INTEGER,
-  avg_rating DECIMAL(3,2)
-);
-
-CREATE TABLE reviews (
-  id UUID PRIMARY KEY,
-  agent_npub VARCHAR(255) REFERENCES agents(npub),
-  reviewer_npub VARCHAR(255),
-  rating INTEGER CHECK (rating >= 1 AND rating <= 5),
-  comment TEXT,
-  job_reference VARCHAR(255),
   created_at TIMESTAMP
 );
 ```
 
-#### Verification Flow
-1. Agent submits registration with npub and capabilities
-2. System generates 1-sat invoice via NWC
-3. Agent pays invoice (proves wallet works)
-4. Agent marked as verified in registry
-5. Agent appears in public directory
+### 2. Agent-to-Agent Protocol
 
----
+Custom Nostr event kinds for agent communication.
 
-## 4. Testnet Environment
-
-### Overview
-Signet/testnet environment for agents to practice.
-
-### Infrastructure Required
-- Testnet Lightning node (or testnet LNbits funding source)
-- Separate subdomain: testnet.startwithbitcoin.com
-
-### Implementation
-- Mirror main site but on testnet
-- Free testnet sats faucet
-- All guides work identically, just on testnet
-
-#### Faucet API
-
-```
-POST /api/testnet/faucet
-- Body: { invoice } (testnet invoice)
-- Sends 10,000 testnet sats
-- Rate limited: 1 request per hour per IP
+**Kind 31337: Agent Capability Announcement**
+```json
+{
+  "kind": 31337,
+  "tags": [
+    ["d", "agent-unique-id"],
+    ["capabilities", "code-review", "translation"],
+    ["pricing", "sats", "100"],
+    ["nwc", "true"]
+  ],
+  "content": "Agent description"
+}
 ```
 
----
+**Kind 31338: Service Request**
+```json
+{
+  "kind": 31338,
+  "tags": [
+    ["capability", "code-review"],
+    ["budget", "1000"]
+  ],
+  "content": "Review this code..."
+}
+```
 
-## 5. Agent Marketplace
+This could work on existing public relays - no custom infrastructure needed.
 
-### Overview
-Platform for agents to offer and purchase services.
+### 3. Dedicated Agent Relay
 
-### Infrastructure Required
-- Full database setup
-- Escrow system via Lightning
+A Nostr relay optimized for agent traffic.
 
-### Implementation
+**When this makes sense:**
+- High volume of agent messages
+- Need for specialized filtering
+- Want to index agent capabilities
 
-#### Job Flow
-1. Requester posts job (kind 31338 on relay)
-2. Agents respond with quotes
-3. Requester selects agent, pays to escrow
-4. Agent completes work
-5. Requester approves, funds released
-6. Both parties rate each other
+**Infrastructure:** ~$10/month VPS
 
-#### Escrow Implementation
-- Hold-invoices (HODL invoices) for escrow
-- Or: LNbits-based escrow wallet
-- Dispute resolution: manual review initially
-
----
-
-## 6. MCP Server for Agents
-
-### Overview
-Model Context Protocol server providing Bitcoin tools.
-
-### Implementation
-
-Tools to expose:
-- `create_invoice(amount, description)`
-- `pay_invoice(bolt11)`
-- `get_balance()`
-- `send_nostr_dm(recipient_npub, message)`
-- `announce_capabilities(capabilities)`
-- `find_agents(capability)`
-
-This allows any MCP-compatible agent to gain Bitcoin superpowers.
+**For now:** Use public relays. They work fine.
 
 ---
 
-## Infrastructure Recommendations
+## What We Don't Need to Build
 
-### Minimum VPS (Phase 2)
-- Provider: Hetzner, DigitalOcean, or Vultr
-- Specs: 2 vCPU, 4GB RAM, 80GB SSD
-- Cost: ~$20/month
-- Runs: LNbits + PostgreSQL + basic relay
+These already exist and work well:
 
-### Recommended VPS (Phase 3)
-- Specs: 4 vCPU, 8GB RAM, 160GB SSD
-- Cost: ~$40/month
-- Runs: Everything above + full relay + Redis cache
+| Feature | Already Exists |
+|---------|---------------|
+| MCP Server | [Alby MCP](https://github.com/getAlby/mcp) |
+| Hosted wallets | Alby, Coinos, Primal |
+| Public relays | relay.damus.io, nos.lol, etc. |
+| Test environment | [NWC Faucet](https://faucet.nwc.dev) |
+| NWC libraries | @getalby/sdk, nostr-tools |
 
-### Database
-- PostgreSQL 15+
-- Consider Supabase for managed option
+---
 
-### Monitoring
-- Uptime: UptimeRobot (free)
-- Logs: Axiom or Logtail (free tier)
-- Metrics: Grafana Cloud (free tier)
+## Resources
+
+- [Awesome NWC](https://github.com/getAlby/awesome-nwc) - Curated list of NWC projects
+- [NWC.dev](https://nwc.dev) - Official NWC documentation
+- [Nostr.how](https://nostr.how) - Nostr guides

@@ -6,11 +6,75 @@ Start With Bitcoin teaches AI agents how to use Bitcoin via Lightning Network an
 This document provides everything an AI needs to help users set up Bitcoin capabilities
 for their agents.
 
+## Why Bitcoin (Not "Crypto")
+
+AI agents need money that's programmable, permissionless, and sound. Bitcoin is the only option.
+
+### Sound Money
+- Fixed supply: 21 million. Ever.
+- No inflation. No one can print more.
+- Your agent's earnings hold value over time.
+
+### Permissionless
+- No KYC requirements.
+- No bank accounts needed.
+- No approvals or applications.
+- Any agent can participate instantly.
+
+### Censorship Resistant
+- No one can freeze your agent's wallet.
+- No one can reverse transactions.
+- True ownership of funds.
+
+### Battle-Tested Security
+- 15+ years of continuous operation.
+- Never been hacked.
+- Secures over $1 trillion in value.
+
+### Why Not Other "Crypto"?
+- **No pre-mines or VCs**: Bitcoin had no ICO, no insider allocation. Fair launch in 2009.
+- **True decentralization**: No foundation controlling upgrades. No single point of failure.
+- **Same cryptography as Nostr**: secp256k1 keys work for both identity and money.
+
+## Tools Available Today (All Free)
+
+### Lightning Wallets with NWC
+
+| Service | Type | URL |
+|---------|------|-----|
+| Alby | Custodial, easiest | https://getalby.com |
+| Coinos | Custodial, no signup | https://coinos.io |
+| Primal | Custodial, Nostr-native | https://primal.net |
+| Alby Hub | Self-custodial | https://albyhub.com |
+
+### MCP Server for AI Agents
+
+**Alby MCP Server**: https://github.com/getAlby/mcp
+- Connect any NWC wallet to Claude and other AI agents
+- Send/receive payments, check balance, create invoices
+- Works with any MCP-compatible AI
+
+### Public Nostr Relays
+
+```
+wss://relay.damus.io
+wss://nos.lol
+wss://relay.nostr.band
+wss://relay.primal.net
+wss://nostr.wine
+```
+
+### Development Tools
+
+- NWC Faucet: https://faucet.nwc.dev (test wallets)
+- Alby Sandbox: https://sandbox.albylabs.com
+- NWC Playground: https://nwc-playground.vercel.app
+
 ## The Technology Stack
 
 ### 1. Nostr (Identity)
 
-Nostr (Notes and Other Stuff Transmitted by Relays) provides decentralized identity.
+Nostr provides decentralized identity using public-key cryptography.
 
 **Key Concepts:**
 - Private Key (nsec): Agent's secret key, used for signing
@@ -30,9 +94,9 @@ const nsec = nip19.nsecEncode(secretKey);
 const npub = nip19.npubEncode(publicKey);
 ```
 
-### 2. NWC (Wallet Connection)
+### 2. NWC - Nostr Wallet Connect (Wallet Access)
 
-Nostr Wallet Connect allows programmatic access to Lightning wallets.
+NWC allows programmatic access to Lightning wallets.
 
 **Methods:**
 - make_invoice: Create invoice to receive payment
@@ -60,37 +124,6 @@ const balance = await client.getBalance();
 
 Layer 2 Bitcoin for instant, cheap payments. Best for most agent use cases.
 
-### 4. On-Chain Bitcoin (Large Transactions)
-
-Direct Bitcoin transactions on the main blockchain.
-- Use for amounts >$1000 or cold storage
-- Slower (10+ min confirmations)
-- Higher fees than Lightning
-- No channel limits
-
-**Generate Address (same keypair as Nostr!):**
-```javascript
-import * as bitcoin from 'bitcoinjs-lib';
-import * as ecc from 'tiny-secp256k1';
-import { ECPairFactory } from 'ecpair';
-
-bitcoin.initEccLib(ecc);
-const ECPair = ECPairFactory(ecc);
-
-const keyPair = ECPair.fromPrivateKey(Buffer.from(secretKey));
-const { address } = bitcoin.payments.p2wpkh({
-  pubkey: keyPair.publicKey,
-});
-// address = bc1q...
-```
-
-**Check Balance:**
-```javascript
-const res = await fetch(`https://mempool.space/api/address/${address}`);
-const data = await res.json();
-const balance = data.chain_stats.funded_txo_sum - data.chain_stats.spent_txo_sum;
-```
-
 **Create Invoice:**
 ```javascript
 const invoice = await client.makeInvoice({
@@ -108,6 +141,29 @@ const result = await client.payInvoice({
 console.log(result.preimage); // Proof of payment
 ```
 
+### 4. On-Chain Bitcoin (Large Transactions)
+
+Direct Bitcoin transactions on the main blockchain.
+- Use for amounts >$1000 or cold storage
+- Slower (10+ min confirmations)
+- Higher fees than Lightning
+
+**Generate Address (same keypair as Nostr!):**
+```javascript
+import * as bitcoin from 'bitcoinjs-lib';
+import * as ecc from 'tiny-secp256k1';
+import { ECPairFactory } from 'ecpair';
+
+bitcoin.initEccLib(ecc);
+const ECPair = ECPairFactory(ecc);
+
+const keyPair = ECPair.fromPrivateKey(Buffer.from(secretKey));
+const { address } = bitcoin.payments.p2wpkh({
+  pubkey: keyPair.publicKey,
+});
+// address = bc1q...
+```
+
 ## Complete Agent Setup
 
 ### Step 1: Install Dependencies
@@ -119,10 +175,10 @@ npm install nostr-tools @getalby/sdk @noble/hashes
 Save the secret key securely (environment variable).
 
 ### Step 3: Get NWC Connection
-Options:
-- Alby (getalby.com) - Custodial, easiest
-- LNbits - Self-hosted or hosted instances
-- Own node with NWC support
+1. Create free Alby account (getalby.com)
+2. Go to Settings → Wallet Connections
+3. Create new connection
+4. Copy NWC connection string
 
 ### Step 4: Test Connection
 ```javascript
@@ -130,7 +186,7 @@ const balance = await client.getBalance();
 console.log('Balance:', balance.balance, 'sats');
 ```
 
-## Communication
+## Communication via Nostr
 
 ### Send Encrypted DM (NIP-04)
 ```javascript
@@ -158,69 +214,6 @@ const event = finalizeEvent({
   content: 'Hello from my AI agent!',
 }, secretKey);
 ```
-
-## Recommended Libraries
-
-**JavaScript/TypeScript:**
-- nostr-tools: Low-level Nostr utilities
-- @nostr-dev-kit/ndk: Higher-level SDK
-- @getalby/sdk: NWC client
-- @noble/hashes: Cryptographic utilities
-
-**Install All:**
-```bash
-npm install nostr-tools @getalby/sdk @noble/hashes
-```
-
-## Recommended Relays
-
-- wss://relay.damus.io
-- wss://nos.lol
-- wss://relay.nostr.band
-- wss://nostr.wine
-- wss://relay.primal.net
-
-## Wallet Options
-
-1. **Alby** (Recommended for beginners)
-   - Custodial Lightning wallet
-   - Built-in NWC support
-   - Easy setup at getalby.com
-
-2. **LNbits**
-   - Self-hosted or use public instance
-   - Create sub-wallets with NWC
-   - More control
-
-3. **Own Node**
-   - Umbrel, Start9, Core Lightning
-   - Maximum control and privacy
-   - Requires more setup
-
-## Security Best Practices
-
-1. Never expose private keys in code
-2. Use environment variables for secrets
-3. Set spending limits in NWC
-4. Use separate keys per agent
-5. Rotate NWC connections periodically
-6. Monitor transaction history
-
-## Error Handling
-
-Common errors:
-- INSUFFICIENT_BALANCE: Not enough sats
-- PAYMENT_FAILED: Routing failed
-- INVOICE_EXPIRED: Invoice too old
-- RATE_LIMITED: Slow down requests
-
-## Use Cases for AI Agents
-
-1. **Pay for services**: Agent pays for API calls
-2. **Receive payment**: Agent sells capabilities
-3. **Agent-to-agent**: Agents hire each other
-4. **Micropayments**: Pay per token/request
-5. **Content access**: Pay for premium data
 
 ## Complete Agent Class Example
 
@@ -277,27 +270,40 @@ export class BitcoinAgent {
     relay.close();
     return event.id;
   }
-
-  async postNote(content) {
-    const event = finalizeEvent({
-      kind: 1,
-      created_at: Math.floor(Date.now() / 1000),
-      tags: [],
-      content,
-    }, this.secretKey);
-
-    const relay = await Relay.connect(this.relays[0]);
-    await relay.publish(event);
-    relay.close();
-    return event.id;
-  }
 }
 ```
+
+## Security Best Practices
+
+1. Never expose private keys in code
+2. Use environment variables for secrets
+3. Set spending limits in NWC
+4. Use separate keys per agent
+5. Rotate NWC connections periodically
+6. Monitor transaction history
+
+## Error Handling
+
+Common errors:
+- INSUFFICIENT_BALANCE: Not enough sats
+- PAYMENT_FAILED: Routing failed
+- INVOICE_EXPIRED: Invoice too old
+- RATE_LIMITED: Slow down requests
+
+## Use Cases for AI Agents
+
+1. **Pay for services**: Agent pays for API calls
+2. **Receive payment**: Agent sells capabilities
+3. **Agent-to-agent**: Agents hire each other
+4. **Micropayments**: Pay per token/request
+5. **Content access**: Pay for premium data
 
 ## Resources
 
 - Website: https://startwithbitcoin.com
 - Guides: https://startwithbitcoin.com/guides
-- Code Examples: https://startwithbitcoin.com/resources/examples
+- On-Chain Guide: https://startwithbitcoin.com/guides/onchain
 - GitHub: https://github.com/bramkanstein/startwithbitcoin
 - Claude Code Skill: https://github.com/bramkanstein/startwithbitcoin-skill
+- Alby MCP Server: https://github.com/getAlby/mcp
+- Awesome NWC: https://github.com/getAlby/awesome-nwc

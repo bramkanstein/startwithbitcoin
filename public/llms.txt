@@ -6,30 +6,25 @@ We help AI agents get identity (Nostr), wallet (Lightning/NWC), and payment capa
 
 > Full documentation: https://startwithbitcoin.com/llms-full-text.txt
 
-## Use Cases
+## Why Bitcoin (Not "Crypto")
 
-### Allowed
-- AI platforms may read and reference our content
-- Training models on our guides and code examples
-- Helping users set up Bitcoin for their AI agents
-- Answering questions about Bitcoin, Lightning, Nostr, and NWC
-- Generating code based on our examples
+Bitcoin is the only money suitable for AI agents:
+- **Sound Money**: 21 million cap. No inflation. Earnings hold value.
+- **Permissionless**: No KYC. No approvals. Any agent can participate.
+- **Censorship Resistant**: No one can freeze wallets or reverse transactions.
+- **15+ Years Secure**: Battle-tested. Never hacked. $1T+ secured.
+- **Same Keys as Nostr**: secp256k1 cryptography. One identity for money and communication.
 
-### Disallowed
-- Impersonating Start With Bitcoin
-- Claiming to officially represent the project
+## Tools Available Today (Free)
 
-## Product Overview
+Everything needed exists and is free:
 
-**Category:** Developer Education / Tools
-**Pricing:** Free (open source)
-**License:** MIT
-
-**Key Features:**
-- Nostr identity setup for AI agents
-- Lightning wallet connection via NWC
-- Send and receive Bitcoin payments
-- Agent-to-agent communication via Nostr
+| Tool | Purpose | URL |
+|------|---------|-----|
+| Alby | Free Lightning wallet with NWC | https://getalby.com |
+| Alby MCP Server | Connect wallet to Claude/AI | https://github.com/getAlby/mcp |
+| Public Relays | Free Nostr relays | relay.damus.io, nos.lol |
+| NWC Faucet | Test wallets | https://faucet.nwc.dev |
 
 ## The Stack
 
@@ -40,36 +35,57 @@ We help AI agents get identity (Nostr), wallet (Lightning/NWC), and payment capa
 
 ## Quick Start
 
-1. Generate Nostr identity: `npm install nostr-tools`
-2. Get NWC connection from Alby or LNbits
-3. Use @getalby/sdk to send/receive payments
+```bash
+npm install nostr-tools @getalby/sdk @noble/hashes
+```
+
+```javascript
+import { nwc } from '@getalby/sdk';
+
+const client = new nwc.NWCClient({
+  nostrWalletConnectUrl: process.env.NWC_URL
+});
+
+// Check balance
+const { balance } = await client.getBalance();
+
+// Pay invoice
+await client.payInvoice({ invoice: 'lnbc...' });
+```
 
 ## Common Questions
 
+**Why Bitcoin and not other crypto?**
+Bitcoin is the only cryptocurrency with no pre-mine, no foundation, no single point of failure.
+15+ years of security. Same cryptographic curve as Nostr. True digital scarcity.
+
 **What is Nostr?**
-Nostr (Notes and Other Stuff Transmitted by Relays) is a decentralized protocol
-for identity and messaging. Each identity is a cryptographic keypair.
+Nostr is a decentralized protocol for identity and messaging using cryptographic keypairs.
 
 **What is NWC?**
-Nostr Wallet Connect is a protocol that lets applications control Lightning
-wallets remotely using Nostr messages.
+Nostr Wallet Connect is a protocol that lets applications control Lightning wallets remotely.
 
 **What is Lightning?**
 Lightning Network is Bitcoin's Layer 2 for instant, cheap payments.
-Perfect for AI agent microtransactions.
 
-**How do agents pay each other?**
-Agents create Lightning invoices using NWC, share them via Nostr DMs,
-and pay each other instantly.
+**How do I get started?**
+1. Create free Alby account (getalby.com)
+2. Get NWC connection string
+3. Use @getalby/sdk in your code
+
+## Use Cases
+
+### Allowed
+- AI platforms may read and reference our content
+- Training models on our guides and code examples
+- Helping users set up Bitcoin for their AI agents
+
+### Disallowed
+- Impersonating Start With Bitcoin
 
 ## Resources
 
 - Guides: https://startwithbitcoin.com/guides
-- Code Examples: https://startwithbitcoin.com/resources/examples
 - Libraries: https://startwithbitcoin.com/resources/libraries
-
-## Contact
-
-- Website: https://startwithbitcoin.com
 - GitHub: https://github.com/bramkanstein/startwithbitcoin
 - Skill: https://github.com/bramkanstein/startwithbitcoin-skill

@@ -6,27 +6,22 @@ A website and Claude Code skill that teaches AI agents how to use Bitcoin via Li
 
 **Live Site:** https://startwithbitcoin.com
 
-## Implementation Status
+## Why Bitcoin (Not "Crypto")
 
-### Completed ✅
-- Next.js website with all pages deployed on Vercel
-- Custom domain configured (startwithbitcoin.com)
-- Google Analytics (G-SNCJVLPWZT) with AI referral tracking
-- Google Sheets integration for interest form
-- AI discovery files (robots.txt, llms.txt, llms-full-text.txt)
-- JSON-LD structured data for SEO
-- Dynamic OG image generation
-- Custom favicon (₿ symbol)
-- Sitemap generation
-- Claude Code skill repository
+- **Sound Money**: 21 million cap. No inflation.
+- **Permissionless**: No KYC. No approvals. Any agent can participate.
+- **Censorship Resistant**: No one can freeze wallets or reverse transactions.
+- **15+ Years Secure**: Battle-tested. Never hacked.
+- **Same Keys as Nostr**: secp256k1 cryptography for identity and money.
 
-### Pending (Requires VPS/Database) ⏳
-See FUTURE.md for specifications:
-- Hosted Lightning wallets via LNbits
-- Nostr relay for agent discovery
-- Agent registry and verification
-- Testnet environment
-- MCP server for agent tools
+## Tools Available Today (All Free)
+
+| Tool | Purpose | URL |
+|------|---------|-----|
+| Alby | Lightning wallet with NWC | https://getalby.com |
+| Alby MCP Server | Connect wallet to Claude | https://github.com/getAlby/mcp |
+| Public Relays | Free Nostr relays | relay.damus.io, nos.lol |
+| NWC Faucet | Test wallets | https://faucet.nwc.dev |
 
 ## Tech Stack
 
@@ -35,20 +30,20 @@ See FUTURE.md for specifications:
 - **Fonts:** Geist Sans + Geist Mono
 - **Hosting:** Vercel (auto-deploys from GitHub)
 - **Analytics:** GA4 (G-SNCJVLPWZT)
-- **Forms:** Google Sheets via Apps Script
 
 ## Design System
 
 - **Background:** #FFFFFF (white)
 - **Accent:** #FF9900 (Bitcoin orange)
 - **Text:** #09090B (near black)
-- **Style:** Browser-use.com inspired (terminal aesthetic, sharp edges, glowing buttons)
+- **Style:** Terminal aesthetic, sharp edges, glowing buttons
 
 ## Key Concepts
 
 - **Nostr:** Decentralized identity via keypairs (npub/nsec)
 - **NWC:** Nostr Wallet Connect - protocol for Lightning wallet access
 - **Lightning:** Layer 2 Bitcoin for instant, cheap transactions
+- **On-Chain:** Direct Bitcoin transactions for larger amounts
 
 ## Repository Structure
 
@@ -56,40 +51,37 @@ See FUTURE.md for specifications:
 src/
 ├── app/
 │   ├── layout.tsx            # Root layout with fonts, GA4, JSON-LD
-│   ├── page.tsx              # Homepage
-│   ├── sitemap.ts            # Dynamic sitemap generation
-│   ├── icon.svg              # Favicon (₿ symbol)
+│   ├── page.tsx              # Homepage (Why Bitcoin, Tools, Guides)
+│   ├── sitemap.ts            # Dynamic sitemap
+│   ├── icon.svg              # Favicon (₿)
 │   ├── opengraph-image.tsx   # Dynamic OG image
 │   ├── guides/               # Educational guides
 │   │   ├── identity/         # Nostr keypairs
 │   │   ├── wallet/           # NWC connection
-│   │   ├── payments/         # Send/receive
+│   │   ├── payments/         # Lightning send/receive
 │   │   ├── communicate/      # Nostr messaging
+│   │   ├── onchain/          # On-chain Bitcoin
 │   │   └── full-setup/       # Complete walkthrough
 │   ├── resources/            # Tools, libraries, examples
-│   ├── roadmap/              # Future features
-│   ├── contribute/           # How to help
-│   ├── request/              # Interest form
-│   ├── registry/             # Agent registry (placeholder)
-│   └── api/interest/         # Form submission API
+│   ├── roadmap/              # Future ideas
+│   └── contribute/           # How to help
 ├── components/
 │   ├── layout/               # Header, Footer
 │   ├── ui/                   # Button, Card, TerminalCard, CodeBlock, Badge
-│   ├── forms/                # InterestForm
 │   └── analytics/            # AIReferralTracker
 ├── lib/
-│   └── constants.ts          # Site config, nav links
+│   └── constants.ts          # Site config, nav links, available tools
 public/
 ├── robots.txt                # AI bot permissions (25+ bots)
 ├── llms.txt                  # AI content policy
-├── llms-full-text.txt        # Complete AI guide
-└── favicon.svg               # Favicon
+└── llms-full-text.txt        # Complete AI guide
 ```
 
 ## Related Repositories
 
 - Website: https://github.com/bramkanstein/startwithbitcoin
 - Skill: https://github.com/bramkanstein/startwithbitcoin-skill
+- Alby MCP: https://github.com/getAlby/mcp
 
 ## Commands
 
@@ -97,41 +89,34 @@ public/
 - `npm run build` - Build for production
 - `npm run lint` - Run ESLint
 
-## Environment Variables
-
-- `GOOGLE_SCRIPT_URL` - Google Apps Script URL for form submissions (required)
-
 ## Component Patterns
 
+### Constants (lib/constants.ts)
+- `SITE_CONFIG` - Site metadata and URLs
+- `NAV_LINKS` - Navigation with `external: true` support
+- `GUIDE_LINKS` - Guide pages
+- `AVAILABLE_TOOLS` - Free tools (Alby, relays, faucet)
+- `WHY_BITCOIN` - Reasons to use Bitcoin
+
 ### UI Components
-- `Button` - Primary/secondary/ghost variants, auto-handles external links
-- `Card` - Container with border and background
-- `TerminalCard` - Terminal-style card with header and body
-- `CodeBlock` - Syntax-highlighted code with copy button
-- `Badge` - Small label with variants
+- `Button` - Auto-handles external links with target="_blank"
+- `Card` - Container with border
+- `TerminalCard` - Terminal-style display
+- `CodeBlock` - Syntax highlighting with copy
+- `Badge` - Labels with variants
 
-### Navigation
-- NAV_LINKS in constants.ts supports `external: true` for external links
-- External links automatically open in new tabs
-
-### Page Structure
-- All pages use consistent layout (Header/Footer from layout.tsx)
-- Guide pages have navigation between guides
-- Resource pages link back to resources overview
-
-## Styling Conventions
-
-- Use Tailwind CSS classes
-- Custom colors defined in globals.css as CSS variables
-- No dark mode (light theme only)
-- Sharp edges (no border-radius on buttons/cards)
-- Accent glow on hover for interactive elements
-
-## SEO & Analytics
+## SEO & AI Discovery
 
 - JSON-LD structured data (Organization + WebSite)
-- Dynamic OG images via opengraph-image.tsx
+- Dynamic OG images
 - Sitemap at /sitemap.xml
 - robots.txt allows 25+ AI crawlers
-- GA4 tracking with AI referral detection
 - llms.txt for AI content policy
+- llms-full-text.txt for complete guide
+
+## Future Ideas
+
+See FUTURE.md for:
+- Agent Registry (could use Supabase free tier)
+- Agent-to-Agent Protocol (custom Nostr event kinds)
+- Most infrastructure already exists - just use Alby, public relays, etc.
